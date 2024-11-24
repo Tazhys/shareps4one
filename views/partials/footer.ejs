@@ -1,0 +1,61 @@
+<footer class="bg-gray-800 text-white mt-10">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <span>&copy; 2024 (PS4Share.one) GoldHEN Cheats Sharing</span>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-json.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+
+
+  
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+    const currentTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      themeIcon.innerHTML = `
+        <!-- Moon Icon -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17.293 13.293a1 1 0 0 1 0 1.414L12 20.414 6.707 15.121a1 1 0 1 1 1.414-1.414L12 17.586l4.879-4.879a1 1 0 0 1 1.414 0z"/>
+      `;
+    } else {
+      themeIcon.innerHTML = `
+        <!-- Sun Icon -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.142-7.071l1.414 1.414M4.222 19.778l1.414-1.414M18.364 19.778l-1.414-1.414M4.222 4.222l1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+      `;
+    }
+  
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        themeIcon.innerHTML = `
+          <!-- Moon Icon -->
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.293 13.293a1 1 0 0 1 0 1.414L12 20.414 6.707 15.121a1 1 0 1 1 1.414-1.414L12 17.586l4.879-4.879a1 1 0 0 1 1.414 0z"/>
+        `;
+      } else {
+        themeIcon.innerHTML = `
+          <!-- Sun Icon -->
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.142-7.071l1.414 1.414M4.222 19.778l1.414-1.414M18.364 19.778l-1.414-1.414M4.222 4.222l1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+        `;
+      }
+    });
+  </script>
+  
+  </body>
+  </html>
+  

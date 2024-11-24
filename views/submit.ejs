@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+
+<div class="container mx-auto mt-10 px-4">
+  <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">
+    Submit a New Cheat
+  </h2>
+  <form
+    action="/submit"
+    method="POST"
+    class="max-w-xl mx-auto bg-white shadow sm:rounded-lg p-6"
+  >
+    <div class="mb-4">
+      <label for="gameTitle" class="block text-sm font-medium text-gray-700"
+        >Game Title</label
+      >
+      <input
+        type="text"
+        id="gameTitle"
+        name="gameTitle"
+        required
+        class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+      />
+    </div>
+
+    <!-- New Title ID Field -->
+    <div class="mb-4">
+      <label for="titleId" class="block text-sm font-medium text-gray-700"
+        >Title ID</label
+      >
+      <input
+        type="text"
+        id="titleId"
+        name="titleId"
+        required
+        class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label
+        for="cheatDescription"
+        class="block text-sm font-medium text-gray-700"
+        >Cheat Description</label
+      >
+      <textarea
+        id="cheatDescription"
+        name="cheatDescription"
+        rows="3"
+        required
+        class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <label for="cheatCode" class="block text-sm font-medium text-gray-700"
+        >Cheat Code</label
+      >
+      <textarea
+        id="cheatCode"
+        name="cheatCode"
+        rows="5"
+        required
+        class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <label for="author" class="block text-sm font-medium text-gray-700"
+        >Your Name</label
+      >
+      <input
+        type="text"
+        id="author"
+        name="author"
+        required
+        class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+      />
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        type="submit"
+        class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+      >
+        Submit Cheat
+      </button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,127 @@
+<%- include('partials/header') %>
+
+<main class="flex-grow">
+  <div class="container mx-auto mt-10 px-4">
+    <h1
+      class="text-4xl font-extrabold text-center text-gray-900 dark:text-gray-100 mb-8"
+    >
+      Shared PS4 Cheats for GoldHEN
+    </h1>
+
+    <!-- Search Form -->
+    <form class="flex justify-center mb-8" method="GET" action="/">
+      <input
+        class="shadow-sm focus:ring-primary focus:border-primary block w-1/3 sm:text-sm border-gray-300 rounded-l-md"
+        type="search"
+        placeholder="Search for a game"
+        name="search"
+        value="<%= typeof search !== 'undefined' ? search : '' %>"
+      />
+      <button
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-primary hover:bg-secondary focus:outline-none transition duration-300"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% cheats.forEach(function(cheat){ %>
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <div
+          onclick="openModal('<%= cheat._id %>')"
+          class="cursor-pointer bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 max-w-sm mx-auto h-72 flex flex-col"
+        >
+          <!-- Card Header -->
+          <div class="bg-gradient-to-r from-primary to-secondary p-3">
+            <h2 class="text-lg font-bold text-white"><%= cheat.gameTitle %></h2>
+            <p class="text-xs text-gray-200 mt-1">
+              Submitted by <%= cheat.author %> on <%= new
+              Date(cheat.date).toDateString() %>
+            </p>
+          </div>
+
+          <!-- Card Content -->
+          <div class="flex-grow p-3 flex flex-col">
+            <p
+              class="text-gray-700 dark:text-gray-300 mb-1 text-sm line-clamp-2"
+            >
+              <strong>Description:</strong> <%= cheat.cheatDescription %>
+            </p>
+            <div
+              class="bg-gray-100 dark:bg-gray-700 p-2 rounded-lg flex-grow flex flex-col overflow-hidden"
+            >
+              <p class="text-gray-800 dark:text-gray-200 mb-1 text-sm">
+                <strong>Cheat Code:</strong>
+              </p>
+              <div class="flex-grow overflow-y-auto">
+                <pre
+                  class="mt-1 text-xs max-h-40 overflow-y-auto"
+                ><code class="language-json"><%= cheat.cheatCode %></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</main>
+
+<!-- Modal Structure -->
+<div
+  id="cheatModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+>
+  <div
+    class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden w-11/12 md:w-1/2 max-h-full overflow-y-auto"
+  >
+    <div class="p-6">
+      <h2 id="modalGameTitle" class="text-2xl font-bold"></h2>
+      <p id="modalAuthorDate" class="text-sm text-gray-500 mt-1"></p>
+      <p
+        id="modalDescription"
+        class="text-gray-700 dark:text-gray-300 mt-4"
+      ></p>
+      <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mt-4">
+        <p class="text-gray-800 dark:text-gray-200 mb-1">
+          <strong>Cheat Code:</strong>
+        </p>
+        <pre
+          id="modalCheatCode"
+          class="mt-2 text-sm max-h-64 overflow-y-auto"
+        ><code class="language-json"></code></pre>
+      </div>
+      <button
+        id="closeModal"
+        class="mt-6 py-2 px-4 bg-secondary text-white rounded-lg"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cheats = <%- JSON.stringify(cheats) %>;
+
+  function openModal(id) {
+    const cheat = cheats.find(c => c._id === id);
+    document.getElementById('modalGameTitle').innerText = cheat.gameTitle;
+    document.getElementById('modalAuthorDate').innerText = `Submitted by ${cheat.author} on ${new Date(cheat.date).toDateString()}`;
+    document.getElementById('modalDescription').innerHTML = `<strong>Description:</strong> ${cheat.cheatDescription}`;
+
+    // Highlight syntax in the modal's cheat code
+    const cheatCodeElement = document.getElementById('modalCheatCode').querySelector('code');
+    cheatCodeElement.textContent = cheat.cheatCode;
+    Prism.highlightElement(cheatCodeElement);
+
+    document.getElementById('cheatModal').classList.remove('hidden');
+  }
+
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('cheatModal').classList.add('hidden');
+  });
+</script>
+
+<%- include('partials/footer') %>
